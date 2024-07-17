@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use App\Http\Requests\BrandRequest;
 
 class BrandController extends Controller
 {
@@ -27,9 +28,29 @@ class BrandController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BrandRequest $request)
     {
-        dd("ok");
+        $validated = $request->validated();
+
+        // Dosya yükleme işlemi
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image->storeAs('public/images', $imageName);
+            $imagePath = 'storage/images/'.$imageName; // Dosyanın yolunu oluşturuyoruz
+        } else {
+            // Dosya yüklenmediyse veya hata oluştuysa işlemleri buraya ekleyebilirsiniz
+            return redirect()->back()->withInput()->withErrors(['image' => 'Dosya yüklenirken bir hata oluştu.']);
+        }
+
+        // Veritabanına kaydetme işlemi
+        $brand = Brand::create([
+            'name' => $validated['name'],
+            'content' => $validated['content'],
+            'image' => $imagePath, // Dosyanın yolu burada kaydediliyor
+        ]);
+
+        return redirect()->route('front.index')->with('success', 'Marka başarıyla eklendi.');
     }
 
     /**

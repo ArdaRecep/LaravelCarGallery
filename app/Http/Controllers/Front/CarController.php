@@ -37,7 +37,9 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        //
+        $selectcar = Car::where('name', $car)->firstOrFail();
+        
+        return view("front.car.show", compact("selectcar"));
     }
 
     /**

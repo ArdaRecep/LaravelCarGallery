@@ -20,7 +20,7 @@
         <div class="row container">
             <!-- Galeri öğeleri -->
             <div class="col galeri">
-                {{-- <a href="{{route('carname', ['carname' => $carname->carname])}}"><img src="1.jpg" class="rounded" alt="Resim 1"></a> --}}
+                <a href=""><img src="1.jpg" class="rounded" alt="Resim 1"></a>
             </div>
             <div class="col galeri">
                 <a href=""><img src="2.jpg" class="rounded" alt="Resim 2"></a>

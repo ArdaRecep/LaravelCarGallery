@@ -37,7 +37,7 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        //
+        
     }
 
     /**
@@ -45,7 +45,7 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
-        //
+
     }
 
     /**
