@@ -8,12 +8,6 @@
                 Marka Ekleme Formu
             </div>
             <div class="card-body">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="http://localhost:8000">Galeri</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Marka Ekle</li>
-                    </ol>
-                </nav>
                 <form method="POST" enctype="multipart/form-data" action="http://localhost:8000/brand/store">
                     @csrf
                     <div class="mb-3">
@@ -30,7 +24,7 @@
                         <label class="form-label" for="image">Marka Logosu:</label>
                         <div>
                             <img id="image"  src="" class="rounded" alt="&nbsp;&nbsp;Logo Ekleyiniz" style="width: 150px; height: 120px;">
-                            <input type="file" id="file-upload" name="image" style="margin-left: 20px;"></input>
+                            <input type="file" id="file-upload" name="image" style="margin-left: 20px;"  accept=".jpg, .jpeg, .png"></input>
                             <script>
                                 document.getElementById('file-upload').addEventListener('change', function() {
                                     var file = this.files[0]; // Seçilen dosyayı alalım

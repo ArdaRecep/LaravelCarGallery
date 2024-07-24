@@ -19,24 +19,11 @@
         <h2 class="text-center">Resim Galerisi</h2>
         <div class="row container">
             <!-- Galeri öğeleri -->
+            @foreach ($cars as $car)
             <div class="col galeri">
-                <a href=""><img src="1.jpg" class="rounded" alt="Resim 1"></a>
+                <a href="#"><img src="{{ url($car->image) }}" class="rounded" alt="Resim 1"></a>
             </div>
-            <div class="col galeri">
-                <a href=""><img src="2.jpg" class="rounded" alt="Resim 2"></a>
-            </div>
-            <div class="col galeri">
-                <a href=""><img src="3.jpg" class="rounded" alt="Resim 3"></a>
-            </div>
-            <div class="col galeri">
-                <a href=""><img src="4.jpg" class="rounded" alt="Resim 4"></a>
-            </div>
-            <div class="col galeri">
-                <a href=""><img src="5.jpg" class="rounded" alt="Resim 5"></a>
-            </div>
-            <div class="col galeri">
-                <a href=""><img src="6.jpg" class="rounded" alt="Resim 6"></a>
-            </div>
+            @endforeach
         </div>
     </div>
 @endsection

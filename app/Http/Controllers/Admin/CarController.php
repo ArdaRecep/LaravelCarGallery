@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Car;
 use Illuminate\Http\Request;
+use App\Http\Requests\CarRequest;
+use Illuminate\Support\Str;
 
 class CarController extends Controller
 {
@@ -21,15 +24,36 @@ class CarController extends Controller
      */
     public function create()
     {
-        //
+        $all_brands = Brand::all();
+        return view("admin.car.create",compact("all_brands"));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CarRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        // Dosya yükleme işlemi
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image->storeAs('public/images', $imageName);
+            $imagePath = 'storage/images/'.$imageName; // Dosyanın yolunu oluşturuyoruz
+        } else {
+            // Dosya yüklenmediyse veya hata oluştuysa işlemleri buraya ekleyebilirsiniz
+            return redirect()->back()->withInput()->withErrors(['image' => 'Dosya yüklenirken bir hata oluştu.']);
+        }
+
+        //'image' => $imagePath, // Dosyanın yolu burada kaydediliyor
+        //'slug' => Str::slug($validated['name']),
+        // Veritabanına kaydetme işlemi
+        $validated["image"]= $imagePath;
+        $validated["slug"]= Str::slug($validated['name']);
+        $car = Car::create($validated);
+
+        return redirect()->route('front.index')->with('success', 'Araba başarıyla eklendi.');
     }
 
     /**
@@ -37,7 +61,7 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        
+
     }
 
     /**

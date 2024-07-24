@@ -22,7 +22,13 @@ class CarRequest extends FormRequest
     public function rules(): array
     {
         return [
-
+            "name"=> "required|min:2|max:25|string",
+            "slug"=> "nullable|unique:cars",
+            "brand_id"=> "required|exists:brands,id",
+            "price"=> "required|numeric",
+            "color"=> "required|min:2",
+            "description"=> "nullable|min:3|max:25|string",
+            "image"=> 'required|image|mimes:jpeg,jpg,png'
         ];
     }
 }

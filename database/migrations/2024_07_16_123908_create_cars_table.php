@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string("slug")->unique();
             $table->foreignIdFor(Brand::class);
             $table->string('color');
-            $table->decimal('price');
+            $table->decimal('price', 10,2);
             $table->longText("description");
             $table->string(("image"));
             $table->timestamps();

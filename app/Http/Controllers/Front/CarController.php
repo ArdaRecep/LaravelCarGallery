@@ -13,7 +13,8 @@ class CarController extends Controller
      */
     public function index()
     {
-        return view("front.car.index");
+        $cars = Car::all();
+        return view("front.car.index",compact("cars"));
     }
 
     /**
@@ -38,7 +39,7 @@ class CarController extends Controller
     public function show(Car $car)
     {
         $selectcar = Car::where('name', $car)->firstOrFail();
-        
+
         return view("front.car.show", compact("selectcar"));
     }
 
