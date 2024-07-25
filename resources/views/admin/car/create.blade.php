@@ -24,9 +24,9 @@
                             placeholder="Model giriniz" required="">
                     </div>
                     <div class="mb-3">
-                        <label for="color" class="form-label">Renk:</label>
-                        <input type="text" class="form-control" id="color" name="color"
-                            placeholder="Renk giriniz" required="">
+                        <label for="url" class="form-label">Video:</label>
+                        <input type="text" class="form-control" id="url" name="url"
+                            placeholder="Url giriniz">
                     </div>
                     <div class="mb-3">
                         <label for="price" class="form-label">Fiyat:</label>
@@ -36,7 +36,7 @@
                     <div class="mb-3">
                         <label for="description" class="form-label">Açıklama:</label>
                         <textarea class="form-control" id="description" name="description"
-                            placeholder="Açıklama giriniz" required=""></textarea>
+                            placeholder="Açıklama giriniz"></textarea>
                     </div>
                     <div class="mb-3 row">
                         <label class="form-label" for="image">Araç Resmi:</label>

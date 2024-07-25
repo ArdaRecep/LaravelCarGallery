@@ -3,8 +3,8 @@
 @section('style')
 <style>
     .galeri img {
-        width: 400px;
-        height: 250px;
+        width: 200px;
+        height: 200px;
         transition: transform 0.3s;
         margin-top: 30px;
     }
@@ -16,14 +16,15 @@
 @endsection
 @section('content')
     <div class="container mt-4">
-        <h2 class="text-center">Arabalar</h2>
+        <h2 class="text-center">Markalar</h2>
         <div class="row container">
             <!-- Galeri öğeleri -->
-            @foreach ($cars as $car)
+            @foreach ($brands as $brand)
             <div class="col galeri">
-                <a href="{{ route("front.car.show", ['slug' => $car->slug]) }}"><img src="{{ url($car->image) }}" class="rounded" alt="Resim 1"></a>
+                <a href="#"><img src="{{ url($brand->image) }}" class="rounded" alt="Resim 1"></a>
             </div>
             @endforeach
         </div>
     </div>
 @endsection
+

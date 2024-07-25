@@ -50,7 +50,7 @@ class BrandController extends Controller
             'image' => $imagePath, // Dosyanın yolu burada kaydediliyor
         ]);
 
-        return redirect()->route('front.index')->with('success', 'Marka başarıyla eklendi.');
+        return redirect()->route("front.brand.index")->with('success', 'Marka başarıyla eklendi.');
     }
 
     /**

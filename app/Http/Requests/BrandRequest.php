@@ -23,7 +23,7 @@ class BrandRequest extends FormRequest
     {
         return [
             "name"=> "required|min:3|max:25|string",
-            "content"=> "nullable|min:3|max:25|string",
+            "content"=> "nullable|min:3|max:1000|string",
             "image"=> 'required|image|mimes:jpeg,jpg,png'
         ];
     }

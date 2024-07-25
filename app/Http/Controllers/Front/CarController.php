@@ -36,11 +36,10 @@ class CarController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Car $car)
+    public function show($slug)
     {
-        $selectcar = Car::where('name', $car)->firstOrFail();
-
-        return view("front.car.show", compact("selectcar"));
+        $car = Car::where('slug',$slug)->firstOrFail();
+        return view("front.car.show", compact("car"));
     }
 
     /**

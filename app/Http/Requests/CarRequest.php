@@ -26,7 +26,7 @@ class CarRequest extends FormRequest
             "slug"=> "nullable|unique:cars",
             "brand_id"=> "required|exists:brands,id",
             "price"=> "required|numeric",
-            "color"=> "required|min:2",
+            "url"=> "nullable|min:5|string",
             "description"=> "nullable|min:3|max:25|string",
             "image"=> 'required|image|mimes:jpeg,jpg,png'
         ];

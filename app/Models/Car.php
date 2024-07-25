@@ -13,8 +13,12 @@ class Car extends Model
         "slug",
         "brand_id",
         "price",
-        "color",
+        "url",
         "description",
         "image"
     ];
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class, 'brand_id');
+    }
 }

@@ -13,7 +13,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        $brands=Brand::all();
+        return view("front.brand.index",compact("brands"));
     }
 
     /**
@@ -21,7 +22,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
