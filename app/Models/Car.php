@@ -21,4 +21,10 @@ class Car extends Model
     {
         return $this->belongsTo(Brand::class, 'brand_id');
     }
+
+    public function handleImagePath($imageUrl)
+    {
+        $imagePath = "storage/" . $imageUrl;
+        return $imagePath;
+    }
 }

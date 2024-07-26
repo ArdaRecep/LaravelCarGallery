@@ -8,6 +8,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
         @yield('style')
         <style>
+            textarea{
+                max-height: 300px;
+            }
             body{height: 100vh;}
             .navbar{
                 position: sticky;
@@ -45,21 +48,21 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="{{ route("front.brand.index") }}" id="navbarDropdownMenuLinkBrand" role="button" aria-expanded="false">
-                                Marka
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkBrand">
-                                <li><a class="dropdown-item" href="{{ route("admin.brand.create") }}">Marka Ekle</a></li>
-                                <li><a class="dropdown-item" href="#">Marka Düzenle</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="{{ route("front.index") }}" id="navbarDropdownMenuLinkCar" role="button" aria-expanded="false">
                                 Araba
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkCar">
                                 <li><a class="dropdown-item" href="{{ route("admin.car.create") }}">Araba Ekle</a></li>
                                 <li><a class="dropdown-item" href="#">Araba Düzenle</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="{{ route("front.brand.index") }}" id="navbarDropdownMenuLinkBrand" role="button" aria-expanded="false">
+                                Marka
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkBrand">
+                                <li><a class="dropdown-item" href="{{ route("admin.brand.create") }}">Marka Ekle</a></li>
+                                <li><a class="dropdown-item" href="#">Marka Düzenle</a></li>
                             </ul>
                         </li>
                     </ul>

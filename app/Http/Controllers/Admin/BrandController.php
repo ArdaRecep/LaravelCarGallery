@@ -44,6 +44,7 @@ class BrandController extends Controller
         }
 
         // Veritabanına kaydetme işlemi
+        $imagePath = str_replace("storage/","",$imagePath);
         $brand = Brand::create([
             'name' => $validated['name'],
             'content' => $validated['content'],
@@ -80,8 +81,10 @@ class BrandController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Brand $brand)
+    public function destroy(string $id)
     {
-        //
+        $brand= Brand::where("id",$id)->firstOrFail();
+        $brand->delete();
+        return redirect()->route("front.brand.index")->with("delete","Marka Başarıyla Silindi");
     }
 }

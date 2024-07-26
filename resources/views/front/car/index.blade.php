@@ -21,7 +21,7 @@
             <!-- Galeri öğeleri -->
             @foreach ($cars as $car)
             <div class="col galeri">
-                <a href="{{ route("front.car.show", ['slug' => $car->slug]) }}"><img src="{{ url($car->image) }}" class="rounded" alt="Resim 1"></a>
+                <a href="{{ route("front.car.show", ['slug' => $car->slug]) }}"><img src="{{ url($car->handleImagePath($car->image)) }}" class="rounded" alt="Resim 1"></a>
             </div>
             @endforeach
         </div>

@@ -20,8 +20,8 @@
         <div class="row container">
             <!-- Galeri öğeleri -->
             @foreach ($brands as $brand)
-            <div class="col galeri">
-                <a href="#"><img src="{{ url($brand->image) }}" class="rounded" alt="Resim 1"></a>
+            <div class="col-md-3 galeri">
+                <a href="{{route("front.brand.show",["id"=>$brand->id])}}"><img src="{{ url($brand->handleImagePath($brand->image)) }}" class="rounded" alt="Resim 1"></a>
             </div>
             @endforeach
         </div>

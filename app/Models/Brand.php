@@ -10,4 +10,9 @@ class Brand extends Model
     use HasFactory;
 
     protected $fillable = ["name","content","image"];
+    public function handleImagePath($imageUrl)
+    {
+        $imagePath = "storage/" . $imageUrl;
+        return $imagePath;
+    }
 }

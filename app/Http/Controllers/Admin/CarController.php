@@ -8,6 +8,7 @@ use App\Models\Car;
 use Illuminate\Http\Request;
 use App\Http\Requests\CarRequest;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class CarController extends Controller
 {
@@ -49,6 +50,7 @@ class CarController extends Controller
         //'image' => $imagePath, // Dosyanın yolu burada kaydediliyor
         //'slug' => Str::slug($validated['name']),
         // Veritabanına kaydetme işlemi
+        $imagePath = str_replace("storage/","",$imagePath);
         $validated["image"]= $imagePath;
         $validated["slug"]= Str::slug($validated['name']);
         $car = Car::create($validated);
@@ -83,8 +85,18 @@ class CarController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Car $car)
+    public function destroy($slug)
     {
-        //
+        $car= Car::where("slug",$slug)->firstOrFail();
+        $photoPath = $car->image;
+        $photoPath = str_replace("storage/","",$photoPath);
+
+         if (Storage::disk("public")->exists($photoPath))
+         {
+             Storage::disk("public")->delete($photoPath);
+         }
+        $car->delete();
+        return redirect()->route("front.index")->with("delete","Araç Başarıyla Silindi");
     }
 }
+
