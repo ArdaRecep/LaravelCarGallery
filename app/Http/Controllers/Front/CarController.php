@@ -11,10 +11,10 @@ class CarController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Car $car2)
     {
         $cars = Car::all();
-        return view("front.car.index",compact("cars"));
+        return view("front.car.index",compact("cars","car2"));
     }
 
     /**

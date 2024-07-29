@@ -26,7 +26,14 @@ class CarController extends Controller
     public function create()
     {
         $all_brands = Brand::all();
-        return view("admin.car.create",compact("all_brands"));
+        if (Brand::count() > 0)
+        {
+            return view("admin.car.create",compact("all_brands"));
+        }
+        else
+        {
+            return redirect()->route('admin.brand.create')->with('error', 'Araba eklemek için önce marka ekleyin!');
+        }
     }
 
     /**
@@ -69,9 +76,11 @@ class CarController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Car $car)
+    public function edit($slug)
     {
-
+        $car=Car::where("slug",$slug)->firstOrFail();
+        $all_brands=Brand::all();
+        return view("admin.car.edit",compact("car","all_brands"));
     }
 
     /**
@@ -79,7 +88,7 @@ class CarController extends Controller
      */
     public function update(Request $request, Car $car)
     {
-        //
+        dd($request);
     }
 
     /**

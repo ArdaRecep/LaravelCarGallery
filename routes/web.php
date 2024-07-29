@@ -26,3 +26,11 @@ Route::get('/car/show/{slug}', [App\Http\Controllers\Front\CarController::class,
 
 Route::delete('/car/delete/{slug}', [App\Http\Controllers\Admin\CarController::class,'destroy'])->name('admin.car.delete');
 
+Route::get('/car/edit/{slug}', [App\Http\Controllers\Admin\CarController::class,'edit'])->name('admin.car.edit');
+
+Route::get('/brand/edit/{id}', [App\Http\Controllers\Admin\BrandController::class,'edit'])->name('admin.brand.edit');
+
+Route::put('/car/update/{slug}', [App\Http\Controllers\Admin\CarController::class,'update'])->name('admin.car.update');
+
+Route::put('/brand/update/{id}', [App\Http\Controllers\Admin\BrandController::class,'update'])->name('admin.brand.update');
+

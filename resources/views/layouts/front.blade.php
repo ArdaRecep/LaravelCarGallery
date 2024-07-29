@@ -25,6 +25,13 @@
                 display: none;
                 overflow: hidden;
             }
+            .ortala {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px
+        }
 
             @keyframes fadeIn {
                 from {
@@ -48,21 +55,21 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="{{ route("front.index") }}" id="navbarDropdownMenuLinkCar" role="button" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLinkCar" role="button" aria-expanded="false">
                                 Araba
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkCar">
+                                <li><a class="dropdown-item" href="{{ route("front.index") }}">Arabalar</a></li>
                                 <li><a class="dropdown-item" href="{{ route("admin.car.create") }}">Araba Ekle</a></li>
-                                <li><a class="dropdown-item" href="#">Araba Düzenle</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="{{ route("front.brand.index") }}" id="navbarDropdownMenuLinkBrand" role="button" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLinkBrand" role="button" aria-expanded="false">
                                 Marka
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkBrand">
+                                <li><a class="dropdown-item" href="{{ route("front.brand.index") }}">Markalar</a></li>
                                 <li><a class="dropdown-item" href="{{ route("admin.brand.create") }}">Marka Ekle</a></li>
-                                <li><a class="dropdown-item" href="#">Marka Düzenle</a></li>
                             </ul>
                         </li>
                     </ul>

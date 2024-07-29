@@ -20,9 +20,12 @@
             <div class="col-md-6">
                 <img src="{{ url($car->handleImagePath($car->image)) }}" class="rounded a" alt="Araba Fotoğrafı">
                 <div class="d-flex justify-content-between pt-3" style="width: 500px">
-                    <button type="button" class="btn btn-outline-success" style="width: 100px">
-                        <i class="fas fa-edit"></i> Edit
-                    </button>
+                    <form action="{{route("admin.car.edit", $car->slug)}}" method="GET">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-success" style="width: 100px">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </form>
                     <form method="POST" action="{{ route('admin.car.delete', $car->slug) }}">
                         @method('DELETE')
                         @csrf
@@ -36,7 +39,7 @@
                 <div class="mt-5">
                     <h2>{{ $car->name }}</h2>
                     <br>
-                    <p><strong>Fiyatı:</strong> {{ $car->price }}</p>
+                    <p><strong>Fiyatı:</strong> {{ $car->price }} TL</p>
                     <div class="d-flex pt-2">
                         <strong class="mt-2">Açıklama:</strong>
                         <textarea class="form-control" style="margin-left:10px; width: 300px;">{{ $car->description }}</textarea>
@@ -46,39 +49,35 @@
                         {{ $car->brand->name }}
                     </p>
                     <p class="pt-2">
-                        <strong>Video:</strong>
+                        <strong id="videolabel">Video:</strong>
                     </p>
-                    <iframe id="videoFrame" width="560" height="315" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe id="videoFrame" width="560" height="315" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
 
                     <script>
-                        // PHP'den gelen URL'yi JavaScript'e geçirebilirsiniz
                         var url = "<?php echo $car->url; ?>";
+                        var videolbl = document.getElementById("videolabel");
 
-                        // URL'yi iframe 'e ayarlayan fonksiyon
                         function setIframeSource(url) {
                             var iframe = document.getElementById('videoFrame');
                             var embedURL = '';
 
                             if (url.includes('youtube.com/watch')) {
-                                // YouTube URL'sinden video ID'sini ayıkla
                                 const videoId = new URL(url).searchParams.get('v');
                                 embedURL = `https://www.youtube.com/embed/${videoId}`;
                             } else if (url.includes('vimeo.com/')) {
-                                // Vimeo URL'sinden video ID'sini ayıkla
                                 const videoId = url.split('/').pop();
                                 embedURL = `https://player.vimeo.com/video/${videoId}`;
                             } else {
-                                // Desteklenmeyen URL'ler için
                                 console.error('Desteklenmeyen video URL\'si.');
+                                videolbl.style.display = 'none';
                                 return;
                             }
-
-                            // iframe 'in src özelliğini ayarla
-                            console.log("Embed URL:", embedURL); // Hata ayıklama için
+                            console.log("Embed URL:", embedURL);
                             iframe.src = embedURL;
                         }
 
-                        // Fonksiyonu çağır
                         setIframeSource(url);
                     </script>
 
