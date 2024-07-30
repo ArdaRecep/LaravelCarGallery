@@ -28,7 +28,7 @@ class CarRequest extends FormRequest
             "price"=> "required|numeric",
             "url"=> "nullable|min:5|string",
             "description"=> "nullable|min:3|max:25|string",
-            "image"=> 'required|image|mimes:jpeg,jpg,png'
+            "image"=> 'nullable|image|mimes:jpeg,jpg,png'
         ];
     }
 }

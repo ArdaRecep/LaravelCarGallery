@@ -7,8 +7,8 @@
                 Araba Güncelleme Formu
             </div>
             <div class="card-body">
-                <form method="POST" enctype="multipart/form-data" action="{{route("admin.car.update",$car->slug)}}">
-                    @method("PUT")
+                <form method="POST" enctype="multipart/form-data" action="{{ route('admin.car.update', $car->slug) }}">
+                    @method('PUT')
                     @csrf
                     <div class="mb-3">
                         <label for="brand_id" class="form-label">Marka:</label>
@@ -47,7 +47,7 @@
                         <div>
                             <div>
                             <img id="image" src="{{ url($car->handleImagePath($car->image)) }}" class="rounded" alt="&nbsp;&nbsp;Resim Ekleyiniz" style="width: 380px; height: 190px;">
-                                <input type="hidden" name="image" value="{{$car->image}}">
+                                <input type="hidden" name="current_image" value="{{$car->image}}">
                         </div>
                             <input style="margin-top: 10px;" type="file" id="file-upload" name="image" accept=".jpg, .jpeg, .png"></input>
                             <script>
