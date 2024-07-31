@@ -39,27 +39,28 @@ class CarController extends Controller
     public function store(CarRequest $request)
     {
         $validated = $request->validated();
-
         // Dosya yükleme işlemi
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->storeAs('public/images', $imageName);
-            $imagePath = 'storage/images/' . $imageName; // Dosyanın yolunu oluşturuyoruz
-        } else {
-            // Dosya yüklenmediyse veya hata oluştuysa işlemleri buraya ekleyebilirsiniz
-            return redirect()->back()->withInput()->withErrors(['image' => 'Dosya yüklenirken bir hata oluştu.']);
+        $imagePaths=[];
+        if ($request->hasFile('images'))
+        {
+            foreach ($request->file('images') as $image)
+            {
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->storeAs('public/images', $imageName);
+                $imagePaths[] = 'storage/images/' . $imageName; // Dosyanın yolunu oluşturuyoruz
+            }
         }
 
-        //'image' => $imagePath, // Dosyanın yolu burada kaydediliyor
-        //'slug' => Str::slug($validated['name']),
-        // Veritabanına kaydetme işlemi
-        $imagePath = str_replace("storage/", "", $imagePath);
-        $validated["image"] = $imagePath;
-        $validated["slug"] = Str::slug($validated['name']);
-        $car = Car::create($validated);
+    // Resim yollarını JSON formatında saklama
+    $validated['images'] = json_encode($imagePaths);
 
-        return redirect()->route('front.index')->with('success', 'Araba başarıyla eklendi.');
+    // Slug oluşturma
+    $validated['slug'] = Str::slug($validated['name']);
+
+    // Veritabanına kaydetme işlemi
+    Car::create($validated);
+
+    return redirect()->route('front.index')->with('success', 'Araba başarıyla eklendi.');
     }
 
     /**

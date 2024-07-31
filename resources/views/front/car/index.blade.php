@@ -2,7 +2,7 @@
 @section('title', 'All Cars')
 @section('style')
     <style>
-        .galeri img {
+        .i {
             width: 400px;
             height: 250px;
             transition: transform 0.3s;
@@ -12,7 +12,9 @@
 
         .galeri img:hover {
             transform: scale(1.05);
-        }.galeri a{
+        }
+
+        .galeri a {
             display: contents;
         }
     </style>
@@ -22,17 +24,19 @@
         <div class="container mt-4">
             <h2 class="text-center">Arabalar</h2>
             <div class="row container">
-                <div class="col galeri">
+                <div class="col galeri" style="display: contents">
                     <!-- Galeri öğeleri -->
                     @foreach ($cars as $car)
                         <a href="{{ route('front.car.show', ['slug' => $car->slug]) }}">
-                            <img src="{{ url($car->handleImagePath($car->image)) }}" class="rounded" alt="{{$car->slug}}"/>
+                            <img src="{{ url($car->handleImagePath($car->image)) }}" class="rounded i"
+                                alt="{{ $car->slug }}" />
                         </a>
                     @endforeach
-                    <a href="{{ route('admin.car.create') }}">
-                        <img class="rounded" src="carplus3.png"
-                            alt=""style="height: 100px!important; width: 150px!important; margin-left: 135px!important;" />
-                    </a>
+                    <div class="d-flex justify-content-center align-items-center" style="height: 250px; width: 400px;">
+                        <a href="{{ route('admin.car.create') }}">
+                            <img class="rounded" src="carplus3.png" alt=""style="height: 100px; width: 150px;" />
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

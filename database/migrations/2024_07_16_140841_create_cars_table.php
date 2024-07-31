@@ -15,10 +15,20 @@ return new class extends Migration {
             $table->string('name');
             $table->string("slug")->unique();
             $table->foreignId('brand_id')->constrained()->cascadeOnDelete();
-            $table->decimal('price', 13,2);
+            $table->decimal('price', 12,2);
             $table->longText("description");
             $table->string('url');
-            $table->string("image");
+            $table->string('fuel');
+            $table->string('drive_type');
+            $table->string('mass');
+            $table->smallInteger ("doors");
+            $table->smallInteger("seats");
+            $table->smallInteger("hp");
+            $table->smallInteger("top_speed");
+            $table->string("transmission");
+            $table->smallInteger("gear");
+            $table->string("type");
+            $table->json("images");
             $table->timestamps();
         });
     }

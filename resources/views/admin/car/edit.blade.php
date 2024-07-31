@@ -47,7 +47,6 @@
                         <div>
                             <div>
                             <img id="image" src="{{ url($car->handleImagePath($car->image)) }}" class="rounded" alt="&nbsp;&nbsp;Resim Ekleyiniz" style="width: 380px; height: 190px;">
-                                <input type="hidden" name="current_image" value="{{$car->image}}">
                         </div>
                             <input style="margin-top: 10px;" type="file" id="file-upload" name="image" accept=".jpg, .jpeg, .png"></input>
                             <script>
@@ -65,7 +64,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-outline-success">Araba güncelle</button>
+                            <button type="submit" class="btn btn-outline-success">Araba Güncelle</button>
                     </div>
                 </form>
             </div>

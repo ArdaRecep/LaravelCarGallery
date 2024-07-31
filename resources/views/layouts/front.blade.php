@@ -15,6 +15,7 @@
             .navbar{
                 position: sticky;
                 top: 0;
+                z-index: 100;
             }
             .dropdown:hover .dropdown-menu {
                 display: block;

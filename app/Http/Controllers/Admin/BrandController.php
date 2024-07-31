@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use App\Http\Requests\BrandRequest;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class BrandController extends Controller
 {
@@ -48,7 +50,6 @@ class BrandController extends Controller
         $imagePath = str_replace("storage/","",$imagePath);
         $brand = Brand::create([
             'name' => $validated['name'],
-            'content' => $validated['content'],
             'image' => $imagePath, // Dosyanın yolu burada kaydediliyor
         ]);
 
@@ -60,23 +61,48 @@ class BrandController extends Controller
      */
     public function show(Brand $brand)
     {
-        //
+
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Brand $brand)
+    public function edit(Brand $brand, $id)
     {
-        //
+        $brand = Brand::where("id", $id)->firstOrFail();
+        return view("admin.brand.edit", compact("brand"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Brand $brand)
+    public function update(BrandRequest $request, Brand $brand, $id)
     {
-        //
+        $brand = Brand::where("id", $id)->firstOrFail();
+        $validated_data = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('public/images', $imageName);
+            $imagePath = 'images/' . $imageName;
+            $oldImagePath = $brand->image;
+            $oldImagePath = str_replace('storage/', '', $oldImagePath);
+            if (Storage::exists('public/'.$oldImagePath))
+            {
+                Storage::disk('public')->delete($oldImagePath);
+            }
+            $validated_data["image"] = $imagePath;
+        }
+        else
+        {
+            $validated_data["image"] = $brand->image;
+        }
+        $brand->update($validated_data);
+
+        // Redirect to the bra$brand show page with a success message
+        return redirect()->route('front.brand.show', $brand->id)
+                         ->with('success', 'Araç Başarıyla Güncellendi');
     }
 
     /**

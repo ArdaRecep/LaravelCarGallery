@@ -28,7 +28,17 @@ class CarRequest extends FormRequest
             "price"=> "required|numeric",
             "url"=> "nullable|min:5|string",
             "description"=> "nullable|min:3|max:25|string",
-            "image"=> 'nullable|image|mimes:jpeg,jpg,png'
+            "images.*"=> 'nullable|image|mimes:jpeg,jpg,png',
+            'fuel'=> "required|string",
+            'drive_type'=>"required|string",
+            'mass'=> "required|integer",
+            'doors'=> "required|integer",
+            'seats'=> "required|integer",
+            'hp'=> "required|integer",
+            'top_speed'=> "required|integer",
+            'transmission'=>"required|string",
+            'gear'=> "required|integer",
+            'type'=>"required|string",
         ];
     }
 }

@@ -10,13 +10,23 @@ class Car extends Model
 {
     use HasFactory;
     protected $fillable =[
-        "name",
-        "slug",
-        "brand_id",
-        "price",
-        "url",
-        "description",
-        "image"
+        'name',
+        'slug',
+        'brand_id',
+        'price',
+        'description',
+        'url',
+        'fuel',
+        'drive_type',
+        'mass',
+        'doors',
+        'seats',
+        'hp',
+        'top_speed',
+        'transmission',
+        'gear',
+        'type',
+        'images'
     ];
 
     public function brand(): BelongsTo

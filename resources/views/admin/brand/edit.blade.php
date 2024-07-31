@@ -7,22 +7,23 @@
                 Marka Ekleme Formu
             </div>
             <div class="card-body">
-                <form method="POST" enctype="multipart/form-data" action="http://localhost:8000/brand/store">
+                <form method="POST" enctype="multipart/form-data" action="{{route("admin.brand.update",$brand->id)}}">
+                    @method("PUT")
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Marka Adı:</label>
-                        <input type="text" class="form-control" id="name" name="name"
+                        <input type="text" value="{{$brand->name}}" class="form-control" id="name" name="name"
                             placeholder="Marka adını giriniz" required="">
                     </div>
                     <div class="mb-3">
                         <label for="content" class="form-label">Açıklama:</label>
                         <textarea class="form-control" id="content" name="content" rows="3"
-                            placeholder="Marka hakkında açıklama giriniz"></textarea>
+                            placeholder="Marka hakkında açıklama giriniz"> {{$brand->content}}</textarea>
                     </div>
                     <div class="mb-3 row">
                         <label class="form-label" for="image">Marka Logosu:</label>
                         <div>
-                            <img id="image" src="" class="rounded" alt="&nbsp;&nbsp;Logo Ekleyiniz"
+                            <img id="image" src="{{ url($brand->handleImagePath($brand->image)) }}" class="rounded" alt="&nbsp;&nbsp;Logo Ekleyiniz"
                                 style="width: 150px; height: 120px;">
                             <input type="file" id="file-upload" name="image" style="margin-left: 20px;"
                                 accept=".jpg, .jpeg, .png"></input>
@@ -42,7 +43,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-outline-success">Marka Ekle</button>
+                        <button type="submit" class="btn btn-outline-success">Marka Güncelle</button>
                     </div>
                 </form>
             </div>
