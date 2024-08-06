@@ -252,12 +252,10 @@
                         setIframeSource(url);
                     </script>
                     <div class="d-flex justify-content-between pt-2" style="width: 500px">
-                        <form action="{{ route('admin.car.edit', $car->slug) }}" method="GET">
                             @csrf
-                            <button type="submit" class="btn btn-outline-success" style="width: 100px">
+                            <a href="{{ route('admin.car.edit', $car->slug) }}" class="btn btn-outline-success" style="width: 100px">
                                 <i class="fas fa-edit"></i> Edit
-                            </button>
-                        </form>
+                            </a>
                         <form method="POST" action="{{ route('admin.car.delete', $car->slug) }}">
                             @method('DELETE')
                             @csrf

@@ -34,3 +34,11 @@ Route::put('/car/update/{slug}', [App\Http\Controllers\Admin\CarController::clas
 
 Route::put('/brand/update/{id}', [App\Http\Controllers\Admin\BrandController::class,'update'])->name('admin.brand.update');
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/car/list', [App\Http\Controllers\HomeController::class,'carlist'])->name('auth.car.list');
+
+Route::get('/brand/list', [App\Http\Controllers\HomeController::class,'brandlist'])->name('auth.brand.list');
