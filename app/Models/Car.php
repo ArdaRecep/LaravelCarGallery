@@ -26,7 +26,9 @@ class Car extends Model
         'transmission',
         'gear',
         'type',
-        'images'
+        'images',
+        'thumbnail',
+        'year'
     ];
 
     public function brand(): BelongsTo

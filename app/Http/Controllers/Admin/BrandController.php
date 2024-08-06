@@ -105,12 +105,16 @@ class BrandController extends Controller
                          ->with('success', 'Araç Başarıyla Güncellendi');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $brand= Brand::where("id",$id)->firstOrFail();
+
+        $photo = $brand->image;
+        $photo = str_replace("storage/", "", $photo);
+        if (Storage::disk("public")->exists($photo)) {
+            Storage::disk("public")->delete($photo);
+        }
+
         $brand->delete();
         return redirect()->route("front.brand.index")->with("delete","Marka Başarıyla Silindi");
     }

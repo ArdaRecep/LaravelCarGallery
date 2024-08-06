@@ -28,13 +28,13 @@
                     <!-- Galeri öğeleri -->
                     @foreach ($cars as $car)
                         <a href="{{ route('front.car.show', ['slug' => $car->slug]) }}">
-                            <img src="{{ url($car->handleImagePath($car->image)) }}" class="rounded i"
-                                alt="{{ $car->slug }}" />
+                            <img src="{{ url($car->thumbnail) }}" class="rounded i"
+                                alt="{{ $car->brand->name." ".$car->slug }}" />
                         </a>
                     @endforeach
                     <div class="d-flex justify-content-center align-items-center" style="height: 250px; width: 400px;">
                         <a href="{{ route('admin.car.create') }}">
-                            <img class="rounded" src="carplus3.png" alt=""style="height: 100px; width: 150px;" />
+                            <img class="rounded i" src="carplus3.png" alt=""style="height: 100px; width: 150px;" />
                         </a>
                     </div>
                 </div>

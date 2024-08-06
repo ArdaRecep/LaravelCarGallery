@@ -29,6 +29,8 @@ return new class extends Migration {
             $table->smallInteger("gear");
             $table->string("type");
             $table->json("images");
+            $table->string("thumbnail");
+            $table->smallInteger("year");
             $table->timestamps();
         });
     }

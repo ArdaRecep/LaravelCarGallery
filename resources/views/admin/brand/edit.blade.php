@@ -4,7 +4,7 @@
     <div style="height: 100vh;" class="container d-flex align-items-center justify-content-center">
         <div style="width: 700px;" class="card row">
             <div class="card-header">
-                Marka Ekleme Formu
+                Marka Düzenleme Formu
             </div>
             <div class="card-body">
                 <form method="POST" enctype="multipart/form-data" action="{{route("admin.brand.update",$brand->id)}}">
@@ -14,11 +14,6 @@
                         <label for="name" class="form-label">Marka Adı:</label>
                         <input type="text" value="{{$brand->name}}" class="form-control" id="name" name="name"
                             placeholder="Marka adını giriniz" required="">
-                    </div>
-                    <div class="mb-3">
-                        <label for="content" class="form-label">Açıklama:</label>
-                        <textarea class="form-control" id="content" name="content" rows="3"
-                            placeholder="Marka hakkında açıklama giriniz"> {{$brand->content}}</textarea>
                     </div>
                     <div class="mb-3 row">
                         <label class="form-label" for="image">Marka Logosu:</label>

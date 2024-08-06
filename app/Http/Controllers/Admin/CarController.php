@@ -40,27 +40,34 @@ class CarController extends Controller
     {
         $validated = $request->validated();
         // Dosya yükleme işlemi
-        $imagePaths=[];
-        if ($request->hasFile('images'))
-        {
-            foreach ($request->file('images') as $image)
-            {
+        $imagePaths = [];
+        $thumbnailPath = null;
+        if ($request->hasFile('thumbnail')) {
+            $thumbnail = $request->file('thumbnail');
+            $thumbnailName = time() . '_' . $thumbnail->getClientOriginalName();
+            $thumbnail->storeAs('public/images', $thumbnailName);
+            $thumbnailPath = 'storage/images/' . $thumbnailName; // Thumbnail'ın yolunu oluşturuyoruz
+        }
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
                 $imageName = time() . '_' . $image->getClientOriginalName();
                 $image->storeAs('public/images', $imageName);
-                $imagePaths[] = 'storage/images/' . $imageName; // Dosyanın yolunu oluşturuyoruz
+                $imagePaths[] = 'images/' . $imageName; // Dosyanın yolunu oluşturuyoruz
             }
         }
 
-    // Resim yollarını JSON formatında saklama
-    $validated['images'] = json_encode($imagePaths);
 
-    // Slug oluşturma
-    $validated['slug'] = Str::slug($validated['name']);
+        // Resim yollarını JSON formatında saklama
+        $validated['images'] = json_encode($imagePaths);
+        $validated['thumbnail'] = $thumbnailPath;
 
-    // Veritabanına kaydetme işlemi
-    Car::create($validated);
+        // Slug oluşturma
+        $validated['slug'] = Str::slug($validated['name']);
 
-    return redirect()->route('front.index')->with('success', 'Araba başarıyla eklendi.');
+        // Veritabanına kaydetme işlemi
+        Car::create($validated);
+
+        return redirect()->route('front.index')->with('success', 'Araba başarıyla eklendi.');
     }
 
     /**
@@ -89,43 +96,73 @@ class CarController extends Controller
         $car = Car::where("slug", $slug)->firstOrFail();
         $validated_data = $request->validated();
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->storeAs('public/images', $imageName);
-            $imagePath = 'images/' . $imageName;
-            $oldImagePath = $car->image;
-            $oldImagePath = str_replace('storage/', '', $oldImagePath);
-            if (Storage::exists('public/'.$oldImagePath))
-            {
-                Storage::disk('public')->delete($oldImagePath);
-            }
-            $validated_data["image"] = $imagePath;
+        if ($request->hasFile('images')) {
+            $images = $request->file('images');
+            $imagePaths = [];
 
+            foreach ($images as $image) {
+                $imageName = time() . '_' . $image->getClientOriginalName();
+                $image->storeAs('public/images', $imageName);
+                $imagePaths[] = 'images/' . $imageName;
+            }
+
+            // Eski resimleri silme
+            $oldImagePaths = json_decode($car->images, true);
+            if (is_array($oldImagePaths)) {
+                foreach ($oldImagePaths as $oldImagePath) {
+                    $oldImagePath = str_replace('storage/', '', $oldImagePath);
+                    if (Storage::exists('public/' . $oldImagePath)) {
+                        Storage::disk('public')->delete($oldImagePath);
+                    }
+                }
+            }
+
+            $validated_data["images"] = json_encode($imagePaths);
+        } else {
+            $validated_data["images"] = $car->images;
         }
-        else
-        {
-            $validated_data["image"] = $car->image;
+
+        // Yeni bir thumbnail dosyası yüklenmişse
+        if ($request->hasFile('thumbnail')) {
+            $thumbnail = $request->file('thumbnail');
+            $thumbnailName = time() . '_' . $thumbnail->getClientOriginalName();
+            $thumbnail->storeAs('public/images', $thumbnailName);
+            $thumbnailPath = 'storage/images/' . $thumbnailName;
+
+            // Eski thumbnail'ı sil
+            $oldThumbnailPath = $car->thumbnail;
+            if ($oldThumbnailPath) {
+                $oldThumbnailPath = str_replace('storage/', '', $oldThumbnailPath);
+                if (Storage::exists('public/' . $oldThumbnailPath)) {
+                    Storage::disk('public')->delete($oldThumbnailPath);
+                }
+            }
+            $validated_data["thumbnail"] = $thumbnailPath;
+        } else {
+
+            $validated_data["thumbnail"] = $car->thumbnail;
         }
         $car->update($validated_data);
-
-        // Redirect to the car show page with a success message
-        return redirect()->route('front.car.show', $car->slug)
-                         ->with('success', 'Araç Başarıyla Güncellendi');
-     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
+        return redirect()->route('front.car.show', $car->slug)->with('success', 'Araç Başarıyla Güncellendi');
+    }
     public function destroy($slug)
     {
         $car = Car::where("slug", $slug)->firstOrFail();
-        $photoPath = $car->image;
-        $photoPath = str_replace("storage/", "", $photoPath);
 
-        if (Storage::disk("public")->exists($photoPath)) {
-            Storage::disk("public")->delete($photoPath);
+        $photoPath = json_decode($car->images, true);
+        foreach ($photoPath as $image) {
+            $image = str_replace("storage/", "", $image);
+            if (Storage::disk("public")->exists($image)) {
+                Storage::disk("public")->delete($image);
+            }
         }
+
+        $photo = $car->thumbnail;
+        $photo = str_replace("storage/", "", $photo);
+        if (Storage::disk("public")->exists($photo)) {
+            Storage::disk("public")->delete($photo);
+        }
+
         $car->delete();
         return redirect()->route("front.index")->with("delete", "Araç Başarıyla Silindi");
     }

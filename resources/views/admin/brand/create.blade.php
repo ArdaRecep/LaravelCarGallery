@@ -21,6 +21,10 @@
         .alert {
             animation: hideAlert 3.4s forwards;
         }
+        .navbar {
+        position: absolute!important;
+        width: 100vw;
+    }
 </style>
     <div style="height: 100vh;" class="container d-flex align-items-center justify-content-center">
         <div style="width: 700px;" class="card row">
@@ -43,21 +47,23 @@
                     <div class="mb-3 row">
                         <label class="form-label" for="image">Marka Logosu:</label>
                         <div>
-                            <img id="image" src="" class="rounded" alt="&nbsp;&nbsp;Logo Ekleyiniz"
-                                style="width: 150px; height: 120px;">
+                            <img id="image" class="rounded" alt="&nbsp;&nbsp;Logo Ekleyiniz"
+                                style="width: 150px; height: 120px; display: none;">
                             <input type="file" id="file-upload" name="image" style="margin-left: 20px;"
                                 accept=".jpg, .jpeg, .png"></input>
                             <script>
+                                var image = document.getElementById('image')
                                 document.getElementById('file-upload').addEventListener('change', function() {
-                                    var file = this.files[0]; // Seçilen dosyayı alalım
-                                    var reader = new FileReader(); // Dosya okuyucu oluşturalım
+                                    var file = this.files[0];
+                                    var reader = new FileReader();
 
                                     reader.onload = function(e) {
-                                        document.getElementById('image').src = e.target
-                                        .result; // Resmin src'sine dosyanın verisini atayalım
+                                        image.src = e.target.result;
+                                        image.style.display = "block";
+                                        image.style.marginBottom = "15px";
                                     }
 
-                                    reader.readAsDataURL(file); // Dosyayı okuyalım ve base64 formatında alalım
+                                    reader.readAsDataURL(file);
                                 });
                             </script>
                         </div>

@@ -9,6 +9,11 @@
             margin-top: 30px;
             margin-right: 75px;
         }
+        .f{
+            height: 100px;
+            width: 100px;
+            transition: transform 0.3s;
+        }
 
         .galeri img:hover {
             transform: scale(1.05);
@@ -34,8 +39,8 @@
                 @endforeach
                 <div class="d-flex justify-content-center align-items-center i">
                     <a href="{{ route('admin.brand.create') }}">
-                        <img class="" src="brandplus2.png"
-                            alt=""style="height: 100px; width: 100px;" />
+                        <img class="rounded f"  src="brandplus2.png"
+                            alt=""/>
                     </a>
                 </div>
             </div>
