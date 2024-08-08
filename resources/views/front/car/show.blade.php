@@ -1,4 +1,4 @@
-@extends('layouts.front')
+{{-- @extends('layouts.front')
 @section('title', 'Car Details')
 @section('style')
     <style>
@@ -251,21 +251,130 @@
 
                         setIframeSource(url);
                     </script>
-                    <div class="d-flex justify-content-between pt-2" style="width: 500px">
-                            @csrf
-                            <a href="{{ route('admin.car.edit', $car->slug) }}" class="btn btn-outline-success" style="width: 100px">
-                                <i class="fas fa-edit"></i> Edit
-                            </a>
-                        <form method="POST" action="{{ route('admin.car.delete', $car->slug) }}">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit" class="btn btn-outline-danger" style="width: 100px">
-                                <i class="fas fa-trash"></i> Delete
-                            </button>
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+@endsection --}}
+
+
+@extends('layouts.master')
+@section('title', $car->name)
+
+@section('content')
+<style>
+/* Genel slider stil ayarları */
+.owl-carousel .item {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Video stil ayarları */
+.video-item video {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+</style>
+    <!-- Header Inner Slider -->
+    <header class="header slider">
+        <div class="owl-carousel owl-theme">
+            <!-- The opacity on the image is made with "data-overlay-dark="number". You can change it using the numbers 0-9. -->
+            @php
+                // JSON verisini PHP dizisine dönüştür
+                $imagesArray = json_decode($car->images, true);
+            @endphp
+            <div class="video-fullscreen-wrap">
+                <!-- The opacity on the image is made with "data-overlay-dark="number". You can change it using the numbers 0-9. -->
+                <div class="video-fullscreen-video" data-overlay-dark="4">
+                    <video playsinline="" autoplay="" loop="" muted="">
+                        <source src="{{url($car->url)}}" type="video/mp4" autoplay="" loop="" muted="">
+                    </video>
+                </div>
+            </div>
+            <div class="text-center item bg-img" data-overlay-dark="4" data-background="{{ url($car->thumbnail) }}"></div>
+            @foreach ($imagesArray as $image)
+                <div class="text-center item bg-img" data-overlay-dark="4"
+                    data-background="{{ url($car->handleImagePath($image)) }}"></div>
+            @endforeach
+        </div>
+    </header>
+    <section class="car-details section-padding" style="padding: 50px 0 0 0!important;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-12">
+                    <div class="row mb-60">
+                        <div class="col-md-12">
+                            <h3>Description</h3>
+                            <p class="mb-30">{{ $car->description }}</p>
+                        </div>
+                    </div>
+                    <!--  Gallery Image -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Image Gallery</h3>
+                        </div>
+                    </div>
+                    <div class="row gallery-items mb-60">
+                        @foreach ($imagesArray as $image)
+                            <div class="col-md-4 gallery-masonry-wrapper single-item cardio">
+                                <a href="{{ url($car->handleImagePath($image)) }}" title="" class="gallery-masonry-item-img-link img-zoom">
+                                    <div class="gallery-box">
+                                        <div class="gallery-img"> <img style="object-fit: cover" src="{{ url($car->handleImagePath($image)) }}"
+                                                class="img-fluid mx-auto d-block" alt=""> </div>
+                                        <div class="gallery-masonry-item-img"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                <!-- Sidebar -->
+                <div class="col-lg-4 col-md-12" style="margin-top: 76.5px;">
+                    <div class="sidebar-car">
+                        <div class="title">
+                            <h4>{{ number_format($car->price, 0, ',', '.') }} ₺<span></span></h4>
+                        </div>
+                        <div class="item">
+                            <div class="features"><span><i class="omfi-door"></i> Doors</span>
+                                <p>{{ $car->doors }}</p>
+                            </div>
+                            <div class="features"><span><i class="fa-sharp fa-light fa-engine"></i> HP</span>
+                                <p>{{ $car->hp }}</p>
+                            </div>
+                            <div class="features"><span><i class="fa-light fa-gas-pump"></i></i> Fuel</span>
+                                <p>{{ $car->fuel }}</p>
+                            </div>
+                            <div class="features"><span><i class="fa-regular fa-weight-hanging"></i> Mass (kg)</span>
+                                <p>{{ $car->mass }}</p>
+                            </div>
+                            <div class="features"><span><i class="omfi-transmission"></i> Gear</span>
+                                <p>{{ $car->gear }}</p>
+                            </div>
+                            <div class="features"><span><i class="fa-light fa-gear"></i> Drive Type</span>
+                                <p>{{ $car->drive_type }}</p>
+                            </div>
+                            <div class="features"><span style="width: max-content"><i class="fa-light fa-gauge-high"></i>
+                                    Top Speed (km/h)</span>
+                                <p>{{ $car->top_speed }}</p>
+                            </div>
+                            <div class="features"><span><i class="fa-light fa-person-seat"></i> Seats</span>
+                                <p>{{ $car->seats }}</p>
+                            </div>
+                            <div class="features"><span><i class="omfi-transmission"></i> Transmission</span>
+                                <p>{{ $car->transmission }}</p>
+                            </div>
+                            <div class="features"><span><i class="fa-light fa-calendar-days"></i> Year</span>
+                                <p>{{ $car->year }}</p>
+                            </div>
+                            <div class="btn-double mt-30" data-grouptype="&amp;"> <a data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal" data-bs-whatever="@mdo" href="#0">Rent Now</a> <a
+                                    href="https://api.whatsapp.com/send?phone=8551004444" target="_blank"><span
+                                        class="fa-brands fa-whatsapp"></span> WhatsApp</a> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection

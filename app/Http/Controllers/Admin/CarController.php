@@ -42,11 +42,18 @@ class CarController extends Controller
         // Dosya yükleme işlemi
         $imagePaths = [];
         $thumbnailPath = null;
+        $urlPath = null;
         if ($request->hasFile('thumbnail')) {
             $thumbnail = $request->file('thumbnail');
             $thumbnailName = time() . '_' . $thumbnail->getClientOriginalName();
             $thumbnail->storeAs('public/images', $thumbnailName);
             $thumbnailPath = 'storage/images/' . $thumbnailName; // Thumbnail'ın yolunu oluşturuyoruz
+        }
+        if ($request->hasFile('url')) {
+            $url = $request->file('url');
+            $urlName = time() . '_' . $url->getClientOriginalName();
+            $url->storeAs('public/videos', $urlName);
+            $urlPath = 'storage/videos/' . $urlName;
         }
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
@@ -60,6 +67,7 @@ class CarController extends Controller
         // Resim yollarını JSON formatında saklama
         $validated['images'] = json_encode($imagePaths);
         $validated['thumbnail'] = $thumbnailPath;
+        $validated['url'] = $urlPath;
 
         // Slug oluşturma
         $validated['slug'] = Str::slug($validated['name']);
@@ -142,6 +150,27 @@ class CarController extends Controller
 
             $validated_data["thumbnail"] = $car->thumbnail;
         }
+
+        // Yeni bir vieo dosyası yüklenmişse
+        if ($request->hasFile('url')) {
+            $url = $request->file('url');
+            $urlName = time() . '_' . $url->getClientOriginalName();
+            $url->storeAs('public/videos', $urlName);
+            $urlPath = 'storage/videos/' . $urlName;
+
+            // Eski video'yu sil
+            $oldurlPath = $car->url;
+            if ($oldurlPath) {
+                $oldurlPath = str_replace('storage/', '', $oldurlPath);
+                if (Storage::exists('public/' . $oldurlPath)) {
+                    Storage::disk('public')->delete($oldurlPath);
+                }
+            }
+            $validated_data["url"] = $urlPath;
+        } else {
+
+            $validated_data["url"] = $car->url;
+        }
         $car->update($validated_data);
         return redirect()->route('front.car.show', $car->slug)->with('success', 'Araç Başarıyla Güncellendi');
     }
@@ -161,6 +190,12 @@ class CarController extends Controller
         $photo = str_replace("storage/", "", $photo);
         if (Storage::disk("public")->exists($photo)) {
             Storage::disk("public")->delete($photo);
+        }
+
+        $video = $car->url;
+        $video = str_replace("storage/", "", $video);
+        if (Storage::disk("public")->exists($video)) {
+            Storage::disk("public")->delete($video);
         }
 
         $car->delete();

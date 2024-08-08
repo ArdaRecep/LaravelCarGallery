@@ -212,12 +212,13 @@
                         <div class="image-container-wrapper">
                             <div class="form-group">
                                 <label class="form-label" for="file-upload">Kapak Resmi:</label>
+                                <input class="form-control mb-2"
+                                type="file" id="file-upload" name="thumbnail" accept=".jpg, .jpeg, .png">
                                 <div class="d-flex align-items-center">
                                     <label for="file-upload">
                                     <img id="image" hidden style="width: 300px; height:240px;" alt="Kapak Resmi" class="img-thumbnail">
                                 </label>
                                 </div>
-                                <input class="form-control-file" style="margin-left: 10px;" type="file" id="file-upload" name="thumbnail" accept=".jpg, .jpeg, .png">
 
                                 <script>
                                     document.getElementById('file-upload').addEventListener('change', function() {
@@ -262,6 +263,7 @@
                         <div class="form-group">
                             <label class="form-label" for="images">Araç Resimleri:</label>
                             <div class="d-flex flex-column">
+                                <input class="form-control mb-2" type="file" id="images" name="images[]" accept=".jpg, .jpeg, .png" multiple>
                                 <div id="image-container" class="image-preview-container">
                                     <!-- Görüntü önizlemeleri burada görünecek -->
 
@@ -274,7 +276,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input class="form-control-file" style="margin-top: 10px;" type="file" id="images" name="images[]" accept=".jpg, .jpeg, .png" multiple>
                                 <script>
                                     // Modal ilgili değişkenler
                                     var modal = document.getElementById("myModal");
@@ -376,43 +377,47 @@
                             <textarea class="form-control" style="height: 130px" id="description" name="description" placeholder="Açıklama giriniz"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="url" class="form-label">Video:</label>
-                            <div class="d-flex">
-                                <input type="text" name="url" id="url" class="form-control mb-4" placeholder="Video URL'si giriniz">
-                                <button type="button" class="btn btn-play" id="play-button"><i class="fas fa-play"></i>
-                                </button>
+                            <label for="fileInput" class="form-label">Video yükleyin (MP4):</label>
+                            <input type="file" id="fileInput" name="url" class="form-control mb-4" accept="video/mp4">
+
+                            <div class="video-wrapper" id="t">
+                                <video id="videoElement" controls width="100%" style="display: none;">
+                                    Your browser does not support the video tag.
+                                </video>
                             </div>
 
-                            <div class="iframe-wrapper" id="t" style="display:none;">
-                                <iframe id="videoFrame" allowfullscreen></iframe>
-                            </div>
                             <script>
-                                document.getElementById('play-button').addEventListener('click', function() {
-                                    var url = document.getElementById('url').value;
-                                    setIframeSource(url);
-                                    var t = document.getElementById('t');
+                                // Handle file input for video playback
+                                document.getElementById('fileInput').addEventListener('change', function(event) {
+                                    var file = event.target.files[0];
+                                    var videoElement = document.getElementById('videoElement');
+                                    var videoWrapper = document.getElementById('t');
+
+                                    if (file) {
+                                        if (file.type === 'video/mp4') {
+                                            var url = URL.createObjectURL(file);
+                                            videoElement.src = url;
+                                            videoElement.style.display = 'block';
+                                            videoElement.play(); // Start playing the video automatically
+                                            videoWrapper.style.display = 'block';
+                                        } else {
+                                            console.error('Lütfen sadece MP4 dosyası seçin.');
+                                            videoWrapper.style.display = 'none';
+                                        }
+                                    }
                                 });
 
-                                function setIframeSource(url) {
-                                    var iframe = document.getElementById('videoFrame');
-                                    var embedURL = '';
+                                // Handle the case where the file input is cleared or canceled
+                                document.getElementById('fileInput').addEventListener('click', function() {
+                                    var videoElement = document.getElementById('videoElement');
+                                    var videoWrapper = document.getElementById('t');
 
-                                    if (url.includes('youtube.com/watch')) {
-                                        const videoId = new URL(url).searchParams.get('v');
-                                        embedURL = `https://www.youtube.com/embed/${videoId}`;
-                                        t.style.display = "block";
-
-                                    } else if (url.includes('vimeo.com/')) {
-                                        const videoId = url.split('/').pop();
-                                        embedURL = `https://player.vimeo.com/video/${videoId}`;
-                                        t.style.display = "block";
-                                    } else {
-                                        iframe.src = '';
-                                        t.style.display = "none";
-                                        return;
+                                    // Ensure the video element's visibility and source are managed correctly
+                                    if (videoElement.src && !document.getElementById('fileInput').files.length) {
+                                        videoElement.style.display = 'block'; // Keep video visible if a file is already loaded
+                                        videoWrapper.style.display = 'block'; // Ensure video wrapper is visible
                                     }
-                                    iframe.src = embedURL;
-                                }
+                                });
                             </script>
                         </div>
                     </div>
