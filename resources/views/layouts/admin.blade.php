@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     @yield('style')
     <style>
+        .form-control{
+            padding: 10px 20px 10px 20px!important;
+        }
+        .form-control[type=file]{
+            padding-top: 14px!important;
+        }
         textarea {
             max-height: 300px;
         }
@@ -66,14 +72,39 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
-                        <a href="{{ route('front.index') }}" class="nav-link " role="button" aria-expanded="false">
-                            Arabalar
+                        <a class="nav-link dropdown-toggle" role="button" aria-expanded="false">
+                            Araba
                         </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="{{ route("front.index") }}">
+                                    Arabalar
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route("admin.car.create") }}">
+                                    Araba Ekle
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-item dropdown">
-                        <a href="{{ route('front.brand.index') }}" class="nav-link" role="button"
+                        <a class="nav-link dropdown-toggle" role="button"
                             aria-expanded="false">
-                            Markalar
+                            Marka
                         </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="{{ route("front.brand.index") }}">
+                                    Markalar
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route("admin.brand.create") }}">
+                                    Marka Ekle
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>

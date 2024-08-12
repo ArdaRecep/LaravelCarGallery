@@ -49,7 +49,8 @@
 
 
 @section('content')
-    <section class="banner-header section-padding bg-img" data-overlay-dark="6" data-background="img/slider/22.jpg">
+{{-- @dd("ok!") --}}
+    <section class="banner-header section-padding bg-img" data-overlay-dark="6" data-background="brandheader.jpg">
         <div class="v-middle">
             <div class="container">
                 <div class="row">
@@ -68,7 +69,7 @@
             <div class="row">
                 @foreach ($brands as $brand)
                     <div class="col-lg-4 col-md-6 mb-45">
-                        <a href="#" style="width: 376px!important; height: 376px !important;">
+                        <a href="{{ route("front.brandcar.index", ['slug' => $brand->slug]) }}" style="width: 376px!important; height: 376px !important;">
                             <div class="item">
 
                                 <div style="z-index: 2" class="info">

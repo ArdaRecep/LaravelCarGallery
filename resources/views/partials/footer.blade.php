@@ -40,51 +40,7 @@
                 </div>
             </div>
         </div> --}}
-        <!-- second footer -->
-        <div class="second-footer">
-            <div class="row">
-                <!-- about & social icons -->
-                <div class="col-md-4 widget-area">
-                    <div class="widget clearfix">
-                        <div class="footer-logo"><img src="img/logo-light.png" alt=""></div>
-                        <!-- <div class="footer-logo"><h2>CARE<span>X</span></h2></div> -->
-                        <div class="widget-text">
-                            <p>Rent a car imperdiet sapien porttito the bibenum ellentesue the commodo erat nesuen.</p>
-                            <div class="social-icons">
-                                <ul class="list-inline">
-                                    <li><a href="#"><i class="fa-brands fa-whatsapp"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- quick links -->
-                <div class="col-md-3 offset-md-1 widget-area">
-                    <div class="widget clearfix usful-links">
-                        <h3 class="widget-title">Quick Links</h3>
-                        <ul>
-                            <li><a href="{{route("front.index")}}">Cars</a></li>
-                            <li><a href="{{route("front.brand.index")}}">Brands</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- subscribe -->
-                <div class="col-md-4 widget-area">
-                    <div class="widget clearfix">
-                        <h3 class="widget-title">Subscribe</h3>
-                        <p>Want to be notified about our services. Just sign up and we'll send you a notification by email.</p>
-                        <div class="widget-newsletter">
-                            <form action="#">
-                                <input type="email" placeholder="Email Address" required="">
-                                <button type="submit"><i class="ti-arrow-top-right"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <!-- bottom footer -->
         <div class="bottom-footer-text">
             <div class="row copyright">

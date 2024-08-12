@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Car;
 use Illuminate\Http\Request;
 
@@ -11,12 +12,26 @@ class CarController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Car $car2)
+    public function index()
     {
         $cars = Car::all();
-        return view("front.car.index",compact("cars","car2"));
+        $a=0;
+        return view("front.car.index",compact("cars","a"));
     }
 
+    public function brandcar($slug)
+    {
+        $car_brand = Brand::where('slug', $slug)->firstOrFail();
+        $cars = Car::where("brand_id",$car_brand->id)->get();
+        if (count($cars)!=0)
+        {
+            $a=1;
+        }
+        else{
+            $a=2;
+        }
+        return view("front.car.index",compact("cars","a","car_brand"));
+    }
     /**
      * Show the form for creating a new resource.
      */

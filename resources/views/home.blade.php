@@ -9,6 +9,7 @@
     }
     body{
         height: 100vh;
+        background-color: #1b1b1b;
     }
     </style>
 <div class="container">

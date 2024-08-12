@@ -17,7 +17,7 @@ class AuthMiddleware
     {
         if (!auth()->check())
         {
-            abort(403);
+            abort(404);
         }
         return $next($request);
     }

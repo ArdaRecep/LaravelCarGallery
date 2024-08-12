@@ -44,13 +44,30 @@
 
 
 @section('content')
-<section class="banner-header section-padding bg-img" data-overlay-dark="6" data-background="1.jpg">
+<section class="banner-header section-padding bg-img" data-overlay-dark="6"
+@if ($a==0)
+data-background="a/1.jpg"
+@elseif($a==1)
+@php
+    // JSON verisini PHP dizisine dönüştür
+    $imagesArray = json_decode($cars[0]->images, true);
+@endphp
+data-background="{{url("storage/$imagesArray[1]")}}"
+@elseif($a==2)
+data-background="{{url("storage/$car_brand->image")}}" style="background-size: contain;"
+@endif >
     <div class="v-middle">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center">
                     <h6>Select Your Car</h6>
-                    <h1>Luxury <span>Car Gallery</span></h1>
+                    @if ($a==0)
+                        <h1>Luxury Ca<span>r Gallery</span></h1>
+                    @elseif ($a==1)
+                        <h1>{{$cars[0]->brand->name}}</h1>
+                    @elseif ($a==2)
+                        <h1>{{$car_brand->name}}</h1>
+                    @endif
                 </div>
             </div>
         </div>

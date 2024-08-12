@@ -1,194 +1,237 @@
 @extends('layouts.admin')
-@section('title', 'Create Car')
+@section('title', 'Edit Car')
 @section('content')
-    <style>
-        body {
-            height: auto !important;
-        }
+<style>
+    /* Genel form input stili */
+    body {
+        background-color: #1b1b1b;
+        height: 100%!important;
+    }
 
-        img {
-            width: 160px;
-            height: 160px;
-            margin: 2px;
-            border-radius: 0.25rem;
-            box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.1);
-        }
-
-        .form-control,
-        .form-control:focus {
-            border-color: #ced4da;
-            box-shadow: none;
-            border-radius: 0.25rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-        }
-
-        .form-col {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .card-header {
-            background-color: #f8f9fa;
-            border-bottom: 1px solid #dee2e6;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #343a40;
-        }
-
-        .card-body {
-            padding: 2rem;
-        }
-
-        .btn-outline-success {
-            border-color: #28a745;
-            color: #28a745;
-            border-radius: 0.25rem;
-        }
-
-        .btn-outline-success:hover {
-            background-color: #28a745;
-            color: #fff;
-            box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.1);
-        }
-
-        .form-label {
-            font-weight: bold;
-            color: #343a40;
-        }
-
-        .custom-file-input {
-            border-radius: 0.25rem;
-        }
-
-        .custom-file-label::after {
-            content: 'Dosya Seç';
-        }
-
-        .image-preview-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 5px;
-        }
-
-        .image-preview-container img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 0.25rem;
-            box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.1);
-        }
-
-        .form-control-file {
-            border-radius: 0.25rem;
-        }
-
-        .iframe-wrapper {
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%;
-            /* 16:9 Aspect Ratio */
-        }
-
-        .iframe-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        .image-container-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            position: relative;
-        }
-
-        .form-col.image-col {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .form-col.image-col .image-preview-container {
-            flex: 1;
-        }
-
-        .btn-play {
-            height: 37.6px;
-        }
-
-        .modal {
-            display: none;
-            /* Gizli varsayılan */
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.8);
-            /* Gri arka plan */
-        }
+    .form-control,
+    .form-control:focus {
+        position: relative;
+        width: 100%;
+        line-height: 30px;
+        padding: 10px 100px 10px 20px;
+        height: 60px;
+        display: block;
+        font-family: 'Outfit', sans-serif;
+        font-size: 14px;
+        background: transparent;
+        color: #1b1b1b;
+        border-radius: 30px;
+        border: 1px solid #f5b754;
+        transition: all 300ms ease;
+    }
+    .form-control:hover{
+        box-shadow: 0 0 0 1px #f5b754;
+    }
+    .form-control:focus {
+        border-color: #f5b754;
+        box-shadow: 0 0 0 2px #f5b754;
+    }
 
 
-        .modal-content img {
-            width: 700px;
-            height: 500px;
-        }
-        .modal-content{
-            width: auto!important;
-            height: auto!important;
-            border: none!important;
-            background: none!important;
-        }
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
 
-        .close {
-            color: #fff;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+    }
 
-        .close:hover,
-        .close:focus {
-            color: #bbb;
-            text-decoration: none;
-            cursor: pointer;
-        }
+    .form-col {
+        flex: 1;
+        min-width: 0;
+    }
 
-        .next, .prev
-        {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            width: auto;
-            padding: 16px;
-            margin-top: -50px;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-            transition: 0.6s ease;
 
-        }
-        .next {right: 0; margin-right: 12px;} .prev{left: 0; margin-left: 12px;}
+    .card-header {
+        background-color: #1b1b1b;
+        border-bottom: 1px solid #dee2e6;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #343a40;
+    }
 
-        .prev:hover, .next:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-    </style>
+    .card-body {
+        background-color: #1b1b1b;
+        padding: 2rem;
+    }
+
+    .btn-outline-success {
+        border-color: #28a745;
+        color: #28a745;
+        border-radius: 0.25rem;
+    }
+
+    .btn-outline-success:hover {
+        background-color: #28a745;
+        color: #fff;
+        box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.1);
+    }
+
+    .form-label {
+        font-weight: bold;
+        color: #343a40;
+    }
+
+    .custom-file-input {
+        border-radius: 0.25rem;
+    }
+
+    .custom-file-label::after {
+        content: 'Dosya Seç';
+    }
+
+    .image-preview-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 5px;
+    }
+
+    .image-preview-container img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 0.25rem;
+        box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.1);
+    }
+
+    .form-control-file {
+        border-radius: 0.25rem;
+    }
+
+    .iframe-wrapper {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%;
+        /* 16:9 Aspect Ratio */
+    }
+
+    .iframe-wrapper iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    .image-container-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        position: relative;
+    }
+
+    .form-col.image-col {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .form-col.image-col .image-preview-container {
+        flex: 1;
+    }
+
+    .btn-play {
+        height: 37.6px;
+    }
+
+    .modal {
+        display: none;
+        /* Gizli varsayılan */
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.8);
+        /* Gri arka plan */
+    }
+
+    .modal-content img {
+        width: 700px;
+        height: 500px;
+    }
+
+    .modal-content {
+        width: auto !important;
+        height: auto !important;
+        border: none !important;
+        background: none !important;
+    }
+
+    .close {
+        color: #fff;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .next,
+    .prev {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        padding: 16px;
+        margin-top: -50px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+    }
+
+    .next {
+        right: 0;
+        margin-right: 12px;
+    }
+
+    .prev {
+        left: 0;
+        margin-left: 12px;
+    }
+
+    .prev:hover,
+    .next:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    input::placeholder {
+        color: #ffffffc5 !important;
+    }
+
+    input {
+        color: #ffffff !important;
+    }
+    textarea::placeholder{
+        color: #ffffffc5 !important;
+    }
+    textarea{
+        color: #ffffff !important;
+    }
+    label{
+        color: #fffffffb!important;
+    }
+    select{
+        color: #ffffff!important;
+    }
+</style>
     <div class="container">
         <div class="card" style="margin-top: 50px; margin-bottom: 50px;">
-            <div class="card-header">
+            <div class="card-header" style="color: #f5b754">
                 Araba Güncelleme Formu
             </div>
             @if ($errors->any())
@@ -211,7 +254,7 @@
                                 <label for="brand_id" class="form-label">Marka:</label>
                                 <select class="form-control" id="brand_id" name="brand_id">
                                     @foreach ($all_brands as $brand)
-                                        <option value="{{ $brand->id }}"
+                                        <option style="color: black" value="{{ $brand->id }}"
                                             @if ($car->brand_id == $brand->id) selected @endif>
                                             {{ $brand->name }}</option>
                                     @endforeach
@@ -248,7 +291,7 @@
                                     <input class="form-control mt-2 mb-2" name="thumbnail"
                                         type="file" id="file-upload" accept=".jpg, .jpeg, .png">
                                     <div class="d-flex align-items-center">
-                                        <img id="image" style="width: 300px; height:240px; object-fit: cover!important;"
+                                        <img id="image" style="width: 394px; height: 240px; padding:0px!important; border-color:#f5b754; object-fit: cover;"
                                             src="{{ url($car->thumbnail) }}" alt="Kapak Resmi" class="img-thumbnail gallery-imagecomposer require laravel/ui">
                                     </div>
                                     <script>
@@ -307,8 +350,9 @@
                                             $imagesArray = json_decode($car->images, true);
                                         @endphp
                                         @foreach ($imagesArray as $image)
-                                            <img style="object-fit: cover!important;" class="gallery-image"
-                                                src="{{ url($car->handleImagePath($image)) }}" alt="Görsel">
+                                            <img style="object-fit : cover; width:190px; height:120px;
+                                            border:1px solid #f5b754;" class="gallery-image"
+                                            src="{{ url($car->handleImagePath($image)) }}" alt="Görsel">
                                         @endforeach
                                         <div id="myModal" class="modal justify-content-center align-items-center">
                                             <div class="modal-content">
@@ -379,6 +423,9 @@
                                                 var img = document.createElement('img');
                                                 img.src = e.target.result;
                                                 img.style.objectFit = 'cover';
+                                                img.style.width="190px";
+                                                img.style.height="120px";
+                                                img.style.border="1px solid #f5b754";
                                                 img.classList.add("gallery-image");
                                                 container.appendChild(img);
                                             }
@@ -429,7 +476,7 @@
                                 <input type="file" id="fileInput" name="url" class="form-control mb-4" accept="video/mp4">
 
                                 <div class="video-wrapper" id="t">
-                                    <video id="videoElement" autoplay muted controls width="100%" src="{{url($car->url)}}">
+                                    <video id="videoElement" autoplay muted controls loop style="height: 250px; width:394.14px; object-fit:cover; border: 1px solid #f5b754;" src="{{url($car->url)}}">
                                         Your browser does not support the video tag.
                                     </video>
                                 </div>
@@ -476,7 +523,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-outline-success">Araba Güncelle</button>
+                        <button type="submit" class="btn btn-outline-success rounded-pill" style="height: 50px; width: 200px; font-weight:bold">Araba Güncelle</button>
                     </div>
                 </form>
             </div>
