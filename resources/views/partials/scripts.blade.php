@@ -14,3 +14,4 @@
 <script src="{{ asset('js/datepicker.js') }}"></script>
 <script src="{{ asset('js/YouTubePopUp.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
+<script src="{{ asset("js/sweetalert2.js") }}"></script>

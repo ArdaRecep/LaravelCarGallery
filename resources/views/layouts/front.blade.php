@@ -52,6 +52,9 @@
                 max-height: 200px;
             }
         }
+        .nav-link.active{
+            color: #f5b754!important;
+        }
     </style>
 </head>
 
@@ -66,7 +69,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" role="button" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle active" role="button" aria-expanded="false">
                             Araba
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">

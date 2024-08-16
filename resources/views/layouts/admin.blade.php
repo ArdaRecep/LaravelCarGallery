@@ -9,12 +9,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     @yield('style')
     <style>
-        .form-control{
-            padding: 10px 20px 10px 20px!important;
+        .form-control {
+            padding: 10px 20px 10px 20px !important;
         }
-        .form-control[type=file]{
-            padding-top: 14px!important;
+
+        .form-control[type=file] {
+            padding-top: 14px !important;
         }
+
         textarea {
             max-height: 300px;
         }
@@ -77,30 +79,29 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li>
-                                <a class="dropdown-item" href="{{ route("front.index") }}">
+                                <a class="dropdown-item" href="{{ route("auth.car.list") }}">
                                     Arabalar
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="{{ route("admin.car.create") }}">
+                                <a class="dropdown-item" href="{{ route('admin.car.create') }}">
                                     Araba Ekle
                                 </a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" role="button"
-                            aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" role="button" aria-expanded="false">
                             Marka
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                             <li>
-                                <a class="dropdown-item" href="{{ route("front.brand.index") }}">
+                                <a class="dropdown-item" href="{{ route("auth.brand.list") }}">
                                     Markalar
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="{{ route("admin.brand.create") }}">
+                                <a class="dropdown-item" href="{{ route('admin.brand.create') }}">
                                     Marka Ekle
                                 </a>
                             </li>
@@ -111,31 +112,26 @@
         </div>
     </nav>
     <script>
-         window.addEventListener('load', function() {
+        window.addEventListener('load', function() {
             var navbar = document.getElementById('navbar');
-            navbar.style.top="0px";
-        });
-        window.addEventListener('beforeunload', function(event) {
-            var message = "Bu sayfadan ayrılmak istediğinizden emin misiniz?";
-            event.returnValue = message;
-            return message;
+            navbar.style.top = "0px";
         });
     </script>
     <script>
         var oncekiScroll = 0;
         var navbar = document.getElementById('navbar');
         var mevcutScroll = -1;
-        navbar.style.transition="top 0.3s ease-in-out";
+        navbar.style.transition = "top 0.3s ease-in-out";
         window.addEventListener('scroll', function() {
             navbar.style.opacity = '0.8';
 
             mevcutScroll = document.documentElement.scrollTop;
             if (mevcutScroll > oncekiScroll) {
                 // Aşağı kaydırma
-                navbar.style.top="-56px";
+                navbar.style.top = "-56px";
             } else {
                 // Yukarı kaydırma
-                navbar.style.top="0px";
+                navbar.style.top = "0px";
             }
 
             if (mevcutScroll <= 0) {
@@ -151,6 +147,18 @@
     </script>
 
     @yield('content')
+    <script src="{{ asset("js/sweetalert2.js") }}"></script>
+    @foreach ($errors->keys() as $field)
+    @if ($errors->has($field))
+        <script>
+            Swal.fire({
+                title: '<strong>{{ $errors->first($field) }}</strong>',
+                icon: 'error',
+            });
+        </script>
+    @endif
+@endforeach
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>

@@ -1,11 +1,95 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+
+    /* Genel form input stili */
+    body {
+        background-color: #1b1b1b;
+        height: 100%!important;
+    }
+
+    .form-control,
+    .form-control:focus {
+        position: relative;
+        width: 100%;
+        line-height: 30px;
+        padding: 10px 100px 10px 20px;
+        height: 60px;
+        display: block;
+        font-family: 'Outfit', sans-serif;
+        font-size: 14px;
+        background: transparent;
+        color: #1b1b1b;
+        border-radius: 30px;
+        border: 1px solid #f5b754;
+        transition: all 300ms ease;
+    }
+    .form-control:hover{
+        box-shadow: 0 0 0 1px #f5b754;
+    }
+    .form-control:focus {
+        border-color: #f5b754;
+        box-shadow: 0 0 0 2px #f5b754;
+    }
+
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+    }
+
+    .form-col {
+        flex: 1;
+        min-width: 0;
+    }
+
+
+    .card-header {
+        background-color: #1b1b1b;
+        border-bottom: 1px solid #dee2e6;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #343a40;
+    }
+
+    .card-body {
+        background-color: #1b1b1b;
+        padding: 2rem;
+    }
+
+    .btn-outline-success {
+        border-color: #28a745;
+        color: #28a745;
+        border-radius: 0.25rem;
+    }
+
+    .btn-outline-success:hover {
+        background-color: #28a745;
+        color: #fff;
+        box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.1);
+    }
+    input::placeholder {
+        color: #ffffffc5 !important;
+    }
+
+    input {
+        color: #ffffff !important;
+    }
+    label{
+        color: #fffffffb!important;
+    }
+</style>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header" style="color: #f5b754;">{{ __('Login') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">

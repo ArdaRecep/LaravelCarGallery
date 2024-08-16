@@ -232,7 +232,7 @@
     <div class="container">
         <div class="card" style="margin-top: 50px; margin-bottom: 50px;">
             <div class="card-header" style="color: #f5b754">
-                Araba Güncelleme Formu
+                Araba Düzenleme Formu
             </div>
             @if ($errors->any())
                 <div class="alert alert-danger">

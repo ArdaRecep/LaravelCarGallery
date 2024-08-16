@@ -284,14 +284,16 @@
                 // JSON verisini PHP dizisine dönüştür
                 $imagesArray = json_decode($car->images, true);
             @endphp
-            <div class="video-fullscreen-wrap">
-                <!-- The opacity on the image is made with "data-overlay-dark="number". You can change it using the numbers 0-9. -->
-                <div class="video-fullscreen-video" data-overlay-dark="4">
-                    <video playsinline="" autoplay="" loop="" muted="">
-                        <source src="{{url($car->url)}}" type="video/mp4" autoplay="" loop="" muted="">
-                    </video>
+            @if(str_starts_with($car->url, 'storage'))
+                <div class="video-fullscreen-wrap">
+                    <!-- The opacity on the image is made with "data-overlay-dark="number". You can change it using the numbers 0-9. -->
+                    <div class="video-fullscreen-video" data-overlay-dark="4">
+                        <video playsinline="" autoplay="" loop="" muted="">
+                            <source src="{{url($car->url)}}" type="video/mp4" autoplay="" loop="" muted="">
+                        </video>
+                    </div>
                 </div>
-            </div>
+            @endif
             <div class="text-center item bg-img" data-overlay-dark="4" data-background="{{ url($car->thumbnail) }}"></div>
             @foreach ($imagesArray as $image)
                 <div class="text-center item bg-img" data-overlay-dark="4"
@@ -367,10 +369,6 @@
                             <div class="features"><span><i class="fa-light fa-calendar-days"></i> Year</span>
                                 <p>{{ $car->year }}</p>
                             </div>
-                            <div class="btn-double mt-30" data-grouptype="&amp;"> <a data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal" data-bs-whatever="@mdo" href="#0">Rent Now</a> <a
-                                    href="https://api.whatsapp.com/send?phone=8551004444" target="_blank"><span
-                                        class="fa-brands fa-whatsapp"></span> WhatsApp</a> </div>
                         </div>
                     </div>
                 </div>

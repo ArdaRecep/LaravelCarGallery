@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Create Brand')
+@section('title', 'Edit Brand')
 @section('content')
 <style>
     body {
@@ -137,7 +137,7 @@
         }
 </style>
     <div class="container">
-        <div style="top:50%; right:50%; transform: translate(50%, -50%); position:absolute width:700px;" class="card row">
+        <div style="top:50%; right:50%; transform: translate(50%, -50%); position:absolute; width:700px;" class="card row">
             <div class="card-header" style="color: #f5b754">
                 Marka Düzenleme Formu
             </div>

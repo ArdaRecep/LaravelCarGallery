@@ -39,7 +39,7 @@ class CarRequest extends FormRequest
             'transmission'=>"required|string",
             'gear'=> "required|integer",
             'type'=>"required|string",
-            "thumbnail"=> 'nullable|image|mimes:jpeg,jpg,png',
+            "thumbnail"=> 'required|image|mimes:jpeg,jpg,png',
             'year' => 'required|integer|between:1800,2200',
         ];
     }

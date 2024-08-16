@@ -1,67 +1,7 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 @section('title', 'Create Car')
 @section('content')
     <style>
-
-        /* Genel form input stili */
-        body {
-            background-color: #1b1b1b;
-            height: 100%!important;
-        }
-
-        .form-control,
-        .form-control:focus {
-            position: relative;
-            width: 100%;
-            line-height: 30px;
-            padding: 10px 100px 10px 20px;
-            height: 60px;
-            display: block;
-            font-family: 'Outfit', sans-serif;
-            font-size: 14px;
-            background: transparent;
-            color: #1b1b1b;
-            border-radius: 30px;
-            border: 1px solid #f5b754;
-            transition: all 300ms ease;
-        }
-        .form-control:hover{
-            box-shadow: 0 0 0 1px #f5b754;
-        }
-        .form-control:focus {
-            border-color: #f5b754;
-            box-shadow: 0 0 0 2px #f5b754;
-        }
-
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-        }
-
-        .form-col {
-            flex: 1;
-            min-width: 0;
-        }
-
-
-        .card-header {
-            background-color: #1b1b1b;
-            border-bottom: 1px solid #dee2e6;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #343a40;
-        }
-
-        .card-body {
-            background-color: #1b1b1b;
-            padding: 2rem;
-        }
 
         .btn-outline-success {
             border-color: #28a745;
@@ -209,23 +149,6 @@
         .next:hover {
             background-color: rgba(0, 0, 0, 0.8);
         }
-
-        input::placeholder {
-            color: #ffffffc5 !important;
-        }
-
-        input {
-            color: #ffffff !important;
-        }
-        textarea::placeholder{
-            color: #ffffffc5 !important;
-        }
-        textarea{
-            color: #ffffff !important;
-        }
-        label{
-            color: #fffffffb!important;
-        }
     </style>
 
     <div class="container" style="margin-bottom: 50px; margin-top:50px;">
@@ -233,15 +156,7 @@
             <div class="card-header d-flex justify-content-center" style="color: #f5b754;">
                 Araba Ekleme Formu
             </div>
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+
             <div class="card-body">
                 <form method="POST" enctype="multipart/form-data" action="{{ route('admin.car.store') }}">
                     @csrf
@@ -251,11 +166,16 @@
                             <div class="form-group">
                                 <label for="brand_id" class="form-label">Marka:</label>
                                 <select style="color: black" class="form-control" id="brand_id" name="brand_id">
-                                    <option selected disabled value="a">Lütfen Marka Seçiniz</option>
+                                    <option selected disabled>Lütfen Marka Seçiniz</option>
                                     @foreach ($all_brands as $brand)
                                         <option style="color: black" value="{{ $brand->id }}">{{ $brand->name }}</option>
                                     @endforeach
                                 </select>
+                                @error("brand_id")
+                                    <div class="invalid-feedback d-block" style="color:red">
+                                        {{ $message }}
+                                      </div>
+                                      @enderror
                                 <script>
                                     document.addEventListener('DOMContentLoaded', function() {
                                         // <select> elementini seç
@@ -275,21 +195,29 @@
                                 <label for="name" class="form-label">Model:</label>
                                 <input type="text" class="form-control" id="name" name="name"
                                     placeholder="Model giriniz" required>
+                                    @error("name")
+                                    <div class="invalid-feedback d-block" style="color:red">
+                                        {{ $message }}
+                                      </div>
+                                      @enderror
                             </div>
                             <div class="form-group">
                                 <label for="year" class="form-label">Yıl:</label>
                                 <input type="text" class="form-control" id="year" name="year"
                                     placeholder="Yıl giriniz" required>
+
                             </div>
                             <div class="form-group">
                                 <label for="price" class="form-label">Fiyat(₺):</label>
                                 <input type="text" class="form-control" id="price" name="price"
                                     placeholder="Fiyat giriniz" required>
+
                             </div>
                             <div class="form-group">
                                 <label for="fuel" class="form-label">Yakıt Tipi:</label>
                                 <input type="text" class="form-control" id="fuel" name="fuel"
                                     placeholder="Yakıt Tipi giriniz" required>
+
                             </div>
                             <div class="form-group">
                                 <label for="drive_type" class="form-label">Çekiş Türü:</label>

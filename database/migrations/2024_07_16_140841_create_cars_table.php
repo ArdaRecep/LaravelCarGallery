@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->foreignId('brand_id')->constrained()->cascadeOnDelete();
             $table->decimal('price', 12,2);
             $table->longText("description");
-            $table->string('url');
+            $table->string('url')->nullable();
             $table->string('fuel');
             $table->string('drive_type');
             $table->string('mass');

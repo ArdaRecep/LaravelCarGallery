@@ -12,6 +12,7 @@
      </svg>
  </div>
  <!-- Navbar -->
+
  <nav class="navbar navbar-expand-lg" id="navbar">
      <div class="container">
          <!-- Logo -->
@@ -26,8 +27,16 @@
          <!-- Menu -->
          <div class="collapse navbar-collapse" id="navbar">
              <ul class="navbar-nav ms-auto">
-                 <li class="nav-item"><a class="nav-link" href="{{route("front.index")}}">Cars</a></li>
-                 <li class="nav-item"><a class="nav-link" href="{{route("front.brand.index")}}">Brands</a></li>
+                 <li class="nav-item"><a class="nav-link
+                 @if(request()->segment(1)=="car"||request()->segment(1)==null)
+                        active
+                  @endif
+                  " href="{{route("front.index")}}">Cars</a></li>
+                 <li class="nav-item"><a class="nav-link
+                    @if (request()->segment(1)=="brand")
+                        active
+                    @endif
+                    " href="{{route("front.brand.index")}}">Brands</a></li>
              </ul>
          </div>
      </div>

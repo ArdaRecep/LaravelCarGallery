@@ -1,6 +1,10 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 @section('title', 'Create Brand')
 @section('content')
+<script>
+   var navbar = document.getElementById("navbar");
+   navbar.style.setProperty('position', 'relative', 'important');
+</script>
 <style>
             @keyframes hideAlert {
             45%{
@@ -159,53 +163,49 @@
         width: 100vw;
     }
 </style>
-    <div style="height: 100vh;" class="container d-flex align-items-center justify-content-center">
-        <div style="width: 700px;" class="card row">
-            <div class="card-header" style="color: #f5b754">
-                Marka Ekleme Formu
-            </div>
-            <div class="card-body">
-                <form method="POST" enctype="multipart/form-data" action="http://localhost:8000/brand/store">
-                    @csrf
-                    <div class="mb-3">
-                        @session('error')
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
-                        @endsession
-                        <label for="name" class="form-label">Marka Adı:</label>
-                        <input type="text" class="form-control" id="name" name="name"
-                            placeholder="Marka adını giriniz" required="">
-                    </div>
-                    <div class="mb-4 row">
-                        <label class="form-label" for="image">Marka Logosu:</label>
-                        <div>
-                            <img id="image" class="rounded" alt="&nbsp;&nbsp;Logo Ekleyiniz"
-                                style="width: 150px; height: 120px; display: none; border: 1px solid #f5b754;">
-                            <input class="form-control" type="file" id="file-upload" name="image" style="width:320px; margin-left: 20px;"
-                                accept=".jpg, .jpeg, .png"></input>
-                            <script>
-                                var image = document.getElementById('image')
-                                document.getElementById('file-upload').addEventListener('change', function() {
-                                    var file = this.files[0];
-                                    var reader = new FileReader();
+<div class="container" style="margin-bottom: 9px; margin-top:9px; width:700px; top:50%; right:50%; transform:translate(50%,-50%); position: absolute;">
+    <div class="card">
+        <div class="card-header" style="color: #f5b754">
+            Marka Ekleme Formu
+        </div>
 
-                                    reader.onload = function(e) {
-                                        image.src = e.target.result;
-                                        image.style.display = "block";
-                                        image.style.marginBottom = "15px";
-                                    }
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data" action="http://localhost:8000/brand/store">
+                @csrf
+                <div class="mb-3">
+                    <label for="name" class="form-label">Marka Adı:</label>
+                    <input type="text" class="form-control" id="name" name="name"
+                        placeholder="Marka adını giriniz" required="">
+                </div>
+                <div class="mb-4 row">
+                    <label class="form-label" for="image">Marka Logosu:</label>
+                    <div>
+                        <img id="image" class="rounded" alt="&nbsp;&nbsp;Logo Ekleyiniz"
+                            style="width: 150px; height: 120px; display: none; border: 1px solid #f5b754;">
+                        <input class="form-control" type="file" id="file-upload" name="image" style="width:320px;"
+                            accept=".jpg, .jpeg, .png"></input>
+                        <script>
+                            var image = document.getElementById('image')
+                            document.getElementById('file-upload').addEventListener('change', function() {
+                                var file = this.files[0];
+                                var reader = new FileReader();
 
-                                    reader.readAsDataURL(file);
-                                });
-                            </script>
-                        </div>
+                                reader.onload = function(e) {
+                                    image.src = e.target.result;
+                                    image.style.display = "block";
+                                    image.style.marginBottom = "15px";
+                                }
+
+                                reader.readAsDataURL(file);
+                            });
+                        </script>
                     </div>
-                    <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-outline-success rounded-pill" style="width: 150px; height:45px; border:2px solid #198754; font-weight:bold;">Marka Ekle</button>
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-outline-success rounded-pill" style="width: 150px; height:45px; border:2px solid #198754; font-weight:bold;">Marka Ekle</button>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 @endsection
