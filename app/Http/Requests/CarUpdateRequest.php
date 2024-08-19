@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CarRequest extends FormRequest
+class CarUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,7 +28,6 @@ class CarRequest extends FormRequest
             "price"=> "required|numeric",
             "url"=> "nullable|mimes:mp4|max:51200",
             "description"=> "required|min:3|max:250|string",
-            "images"=> "required",
             "images.*"=> 'required|image|mimes:jpeg,jpg,png',
             'fuel'=> "required|string",
             'drive_type'=>"required|string",
@@ -40,7 +39,7 @@ class CarRequest extends FormRequest
             'transmission'=>"required|string",
             'gear'=> "required|integer",
             'type'=>"required|string",
-            "thumbnail"=> 'required|image|mimes:jpeg,jpg,png',
+            "thumbnail"=> 'nullable|image|mimes:jpeg,jpg,png',
             'year' => 'required|integer|between:1800,2200',
         ];
     }

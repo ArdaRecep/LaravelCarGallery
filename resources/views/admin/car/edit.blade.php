@@ -476,7 +476,8 @@
                                 <input type="file" id="fileInput" name="url" class="form-control mb-4" accept="video/mp4">
 
                                 <div class="video-wrapper" id="t">
-                                    <video id="videoElement" autoplay muted controls loop style="height: 250px; width:394.14px; object-fit:cover; border: 1px solid #f5b754;" src="{{url($car->url)}}">
+                                    <video id="videoElement" autoplay muted controls loop style="height: 250px; width:394.14px; object-fit:cover; border: 1px solid #f5b754;"
+                                     src="{{url($car->url ?? '')}}">
                                         Your browser does not support the video tag.
                                     </video>
                                 </div>

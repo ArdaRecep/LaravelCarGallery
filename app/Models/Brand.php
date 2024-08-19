@@ -10,7 +10,7 @@ class Brand extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["name","content","image"];
+    protected $fillable = ["name","slug","image"];
 
     public function cars(): HasMany
     {

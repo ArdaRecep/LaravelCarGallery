@@ -9,7 +9,7 @@ Route::get('/', function () {
 
 Route::get('/', [App\Http\Controllers\Front\CarController::class,'index'])->name('front.index');
 
-Route::get('brand/cars/{slug}', [App\Http\Controllers\Front\CarController::class,'brandcar'])->name('front.brandcar.index');
+Route::get('/brand/cars/{slug}', [App\Http\Controllers\Front\CarController::class,'brandcar'])->name('front.brandcar.index');
 
 Route::get('/brand', [App\Http\Controllers\Front\BrandController::class,'index'])->name('front.brand.index');
 

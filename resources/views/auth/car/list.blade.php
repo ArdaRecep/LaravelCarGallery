@@ -95,7 +95,7 @@
                     <td>{{ $car->brand->name }}</td>
                     <td class="text-center">
                         <a href="{{ route("admin.car.edit", $car->slug) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route("admin.car.delete", $car->id) }}" method="POST" style="display:inline;">
+                        <form action="{{ route("admin.car.delete", $car->slug) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>

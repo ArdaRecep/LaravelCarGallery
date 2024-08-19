@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\Car;
 use Illuminate\Http\Request;
 use App\Http\Requests\CarRequest;
+use App\Http\Requests\CarUpdateRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
@@ -99,7 +100,7 @@ class CarController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CarRequest $request, Car $car, $slug)
+    public function update(CarUpdateRequest $request, Car $car, $slug)
     {
         $car = Car::where("slug", $slug)->firstOrFail();
         $validated_data = $request->validated();
@@ -199,7 +200,7 @@ class CarController extends Controller
         }
 
         $car->delete();
-        return redirect()->route("front.index")->with("delete", "Araç Başarıyla Silindi");
+        return redirect()->route("auth.car.list")->with("delete", "Araç Başarıyla Silindi");
     }
 }
 
