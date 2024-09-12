@@ -38,7 +38,6 @@
     </div>
 @endsection --}}
 
-
 @extends('layouts.master')
 @section('title', 'All Cars')
 
@@ -95,7 +94,7 @@ data-background="{{url("storage/$car_brand->image")}}" style="background-size: c
                             </svg>
                         </div>
                     </div>
-                    <a href="{{ route('front.car.show', ['slug' => $car->slug]) }}" class="img"> <img src="{{url($car->thumbnail)}}" alt="" class="img-fluid">
+                    <a href="{{ route('front.car.show', ['slug' => $car->slug]) }}" class="img"> <img src="{{url($car->thumbnail)}}" style="object-fit: cover;" alt="" class="img-fluid">
                         <div class="bottom-fade"></div>
                         <div class="arrow"> <i class="ti-arrow-right"></i> </div>
                     </a>

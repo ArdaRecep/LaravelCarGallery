@@ -1,66 +1,153 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# CarGallery
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+CarGallery is a vehicle gallery application developed with Laravel. The project features an admin panel for managing cars and brands, and a user interface for viewing detailed information about vehicles. This project includes functionalities such as authorization, authentication, file uploads, and CRUD operations. Laravel's built-in authentication system is utilized.
 
-## About Laravel
+### Requirements
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **PHP**: 8.2.12
+- **Laravel**: 11.15.0
+- **Composer**: 2.7.7
+- **MySQL MariaDB**: 10.4.32
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Installation Steps
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. **Clone the Repository**
 
-## Learning Laravel
+   ```bash
+   git clone https://github.com/ArdaRecep/LaravelCarGallery.git
+   cd LaravelCarGallery
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+2. **Install Dependencies**
+   
+   ```bash
+   composer install
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+4. **Create Environment File**
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+   ```bash
+   cp .env.example .env
 
-## Laravel Sponsors
+5. **Configure the Environment**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+   Open the .env file and set up your database configuration:
+   
+   ```bash
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=car_gallery
+   DB_USERNAME=root
+   DB_PASSWORD=
 
-### Premium Partners
+7. **Run Migrations**
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+   ```bash
+   php artisan migrate
 
-## Contributing
+8. **Key Generate And NPM Install**
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+   ```bash
+   php artisan key:generate
+   npm install
+   npm run dev
 
-## Code of Conduct
+9. **Serve the Application**
+    
+    Open a new terminal
+   ```bash
+   php artisan serve
+    
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+**The application will be accessible at http://localhost:8000**
 
-## Security Vulnerabilities
+## Screenshots
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Home Page
 
-## License
+<br />
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+![HomePage1](https://github.com/user-attachments/assets/8976c633-3ff3-4d66-8550-74f93b041946)
+
+***************************************************
+
+![HomePage2](https://github.com/user-attachments/assets/665494ef-45c9-405c-88cb-48233b193c82)
+
+***************************************************
+
+![HomePage3](https://github.com/user-attachments/assets/d5ed7e82-3a0f-4466-b240-619f6885b470)
+
+<br />
+
+### Login Page
+
+**http://localhost:8000/login**
+<br />
+
+![Login](https://github.com/user-attachments/assets/89dd0278-7092-452c-97d2-1b7f22e37f6b)
+
+<br />
+
+### Register Page
+
+<br />
+
+![Register](https://github.com/user-attachments/assets/f6853809-70dc-42aa-989c-c0ed0b69ce52)
+
+<br />
+
+### Admin Dashboard
+
+<br />
+
+![AdminDashboard](https://github.com/user-attachments/assets/95a5c453-4adc-44ce-891a-7762cd37d43e)
+
+<br />
+
+### List/Delete/Edit Car/Brand Page
+
+<br />
+
+![CarList](https://github.com/user-attachments/assets/1080dbd0-5f4d-48f9-8b3b-a7016c00143d)
+
+***************************************************
+
+![BrandList](https://github.com/user-attachments/assets/d8808ada-a911-4c42-a281-4edc33ea644d)
+
+<br />
+
+### Add/Edit Car/Brand Page
+
+<br />
+
+![CarEdit](https://github.com/user-attachments/assets/c8210c56-e3bd-4678-af96-708fc4ddfafc)
+
+***************************************************
+
+![BrandEdit](https://github.com/user-attachments/assets/f1a8b084-58b0-466a-a36a-8c3ef370686a)
+
+<br />
+
+### View Car/Brand Details Page
+
+<br />
+
+![CarDetails1](https://github.com/user-attachments/assets/0e60a693-52b5-450c-af86-03f82e0f5996)
+
+***************************************************
+
+![CarDetails2](https://github.com/user-attachments/assets/940ad7fb-402c-46a2-8cb9-54873dac8f5e)
+
+***************************************************
+
+![CarDetails3](https://github.com/user-attachments/assets/ac08781a-79bb-4a75-a7bb-5f51d5d5633f)
+
+***************************************************
+
+![BrandDetails1](https://github.com/user-attachments/assets/3ff4501e-4947-461d-aa31-8617c7cec7fe)
+
+***************************************************
+
+![BrandDetails2](https://github.com/user-attachments/assets/6e877212-ab30-4f65-89f2-dc73f6d58b13)
+
+<br />
+

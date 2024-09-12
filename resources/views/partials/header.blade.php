@@ -13,7 +13,7 @@
  </div>
  <!-- Navbar -->
 
- <nav class="navbar navbar-expand-lg" id="navbar">
+ <nav class="navbar navbar-expand-lg" id="navbar" style="transition: 0.5s, easier;">
      <div class="container">
          <!-- Logo -->
          <div class="logo-wrapper">
